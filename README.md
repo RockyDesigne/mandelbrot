@@ -1,6 +1,7 @@
 # Mandelbrot
 
 A program made using the SFML library, that renders in real time the Mandelbrot set. Used OpenMP to enable multithreading.
+Also used this template to set up the project: https://github.com/ufrshubham/sfml-project-template
 
 ## Table of Contents
 
