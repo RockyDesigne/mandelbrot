@@ -6,7 +6,7 @@ A program made using the SFML library, that renders in real time the Mandelbrot 
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Getting Started](#getting started)
+- [Getting Started](#getting)
 - [Screenshot](#screenshot)
 
 ## Introduction
@@ -25,4 +25,4 @@ You will need to install the SFML library, as well as a C++ compiler that suppor
 - Change the number of iterations using the scroll wheel
 
 ## Screenshot
-
+![background image](./screenshots/ss1.png)
