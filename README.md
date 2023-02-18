@@ -15,7 +15,7 @@ Also used this template to set up the project: https://github.com/ufrshubham/sfm
 This program uses the SFML library to render the famous Mandelbrot set in real-time. The program allows you to explore the Mandelbrot set by zooming in and out and panning around, while also displaying the current number of iterations and zoom factor.
 
 ## Getting started
-You will need to install the SFML library, as well as a C++ compiler that supports C++14 or later and it should have support for OpenMP.
+You will need to install the SFML library, as well as a C++ compiler that supports C++17 or later and it should have support for OpenMP.
 
 ## Features
 
