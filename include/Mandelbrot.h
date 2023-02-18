@@ -39,7 +39,6 @@ public:
     void mandy(sf::Vector2i screen);
 
     //accessor functions
-
     // setters
     void set_color(int iters, int x, int y);
 

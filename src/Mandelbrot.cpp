@@ -4,17 +4,9 @@
 #include "Mandelbrot.h"
 
 void Mandelbrot::init_variables() {
-    this->m_width = 1920;
-    this->m_height = 1080;
-    this->m_image.create(m_width, m_height);
-    if (!this->m_texture.create(m_width, m_height))
+    m_image.create(m_width, m_height);
+    if (!m_texture.create(m_width, m_height))
         assert("Failed to create texture");
-    this->m_maxIterations = 128;
-    this->m_minRe = -2.5;
-    this->m_maxRe = 1.0;
-    this->m_minIm = -1.0;
-    this->m_maxIm = 1.0;
-    this->m_zoom = 1.0;
 }
 
 sf::Color Mandelbrot::interpolate_color(double colorIndex, const std::vector<sf::Color>& colors) {
@@ -54,18 +46,18 @@ void Mandelbrot::set_color(int iters, int x, int y) {
 
     // If the number of iterations is equal to the maximum number of iterations, the point is considered to be in the set
     // and is assigned the default color (black)
-    if (iters == this->m_maxIterations) {
+    if (iters == m_maxIterations) {
         iters = 0;
     }
 
     // Calculate the value of mu, which is a value between 0 and 1 that is used to determine the color of the point
-    double mu {1.0 * iters / this->m_maxIterations};
+    double mu {1.0 * iters / m_maxIterations};
 
     // Calculate the value of mu, which is a value between 0 and 1 that is used to determine the color of the point
     auto color {interpolate_color(mu, colors)};
 
     // Set the color of the pixel at (x, y) in the Mandelbrot image
-    this->m_image.setPixel(x, y, color);
+    m_image.setPixel(x, y, color);
 }
 
 /**
@@ -85,8 +77,8 @@ void Mandelbrot::mandy(sf::Vector2i screen) {
         for (int x = 0; x < screen.x; ++x) {
 
             // Calculate the coordinates of the current pixel on the complex plane
-            CoordType realCoord {this->m_minRe + (this->m_maxRe - this->m_minRe) * x / screen.x};
-            CoordType imagCoord {this->m_minIm + (this->m_maxIm - this->m_minIm) * y / screen.y};
+            CoordType realCoord {m_minRe + (m_maxRe - m_minRe) * x / screen.x};
+            CoordType imagCoord {m_minIm + (m_maxIm - m_minIm) * y / screen.y};
 
             // Initialize the real and imaginary parts of the complex number to 0
             CoordType realComponent {0.0}, imagComponent {0.0};
@@ -94,7 +86,7 @@ void Mandelbrot::mandy(sf::Vector2i screen) {
 
             // Perform the iterative calculation to determine whether the current point
             // is in the Mandelbrot set or not
-            for (iters = 0; iters < this->m_maxIterations; ++iters) {
+            for (iters = 0; iters < m_maxIterations; ++iters) {
 
                 // Calculate the next point in the sequence
                 CoordType tr {realComponent * realComponent - imagComponent * imagComponent + realCoord};
@@ -113,51 +105,54 @@ void Mandelbrot::mandy(sf::Vector2i screen) {
 }
 
 sf::Image Mandelbrot::get_image() {
-    return this->m_image;
+    return m_image;
 }
 
 long double Mandelbrot::get_min_re() const {
-    return this->m_minRe;
+    return m_minRe;
 }
 
 void Mandelbrot::set_min_re(long double minRe) {
-    this->m_minRe = minRe;
+    m_minRe = minRe;
 }
 
-Mandelbrot::Mandelbrot() {
-    this->init_variables();
+// member initialization list
+Mandelbrot::Mandelbrot() : m_width {1920}, m_height {1080}, m_maxIterations{128},
+    m_minRe {-2.5}, m_maxRe {1.0}, m_minIm {-1.0}, m_maxIm {1.0}, m_zoom {1.0}
+{
+    init_variables();
 }
 
 void Mandelbrot::set_max_re(long double maxRe) {
-    this->m_maxRe = maxRe;
+    m_maxRe = maxRe;
 }
 
 void Mandelbrot::set_min_im(long double minIm) {
-    this->m_minIm = minIm;
+    m_minIm = minIm;
 }
 
 void Mandelbrot::set_max_im(long double maxIm) {
-    this->m_maxIm = maxIm;
+    m_maxIm = maxIm;
 }
 
 long double Mandelbrot::get_max_re() const {
-    return this->m_maxRe;
+    return m_maxRe;
 }
 
 long double Mandelbrot::get_min_im() const {
-    return this->m_minIm;
+    return m_minIm;
 }
 
 long double Mandelbrot::get_max_im() const {
-    return this->m_maxIm;
+    return m_maxIm;
 }
 
 void Mandelbrot::set_max_iterations(int maxIterations) {
-    this->m_maxIterations = maxIterations;
+    m_maxIterations = maxIterations;
 }
 
 int Mandelbrot::get_max_iterations() const {
-    return this->m_maxIterations;
+    return m_maxIterations;
 }
 
 /**
@@ -184,9 +179,9 @@ sf::Color Mandelbrot::linear_interp(const sf::Color& color1, const sf::Color& co
 
 
 long double Mandelbrot::get_zoom() const {
-    return this->m_zoom;
+    return m_zoom;
 }
 
 void Mandelbrot::set_zoom(long double zoom) {
-    this->m_zoom = zoom;
+    m_zoom = zoom;
 }

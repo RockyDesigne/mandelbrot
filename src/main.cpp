@@ -12,7 +12,7 @@ int main () {
     Mandelbrot mandelbrot {};
 
     // create window
-    Window window{1920, 1080};
+    Window window{};
 
     while (window.is_running()) {
         window.update(mandelbrot);

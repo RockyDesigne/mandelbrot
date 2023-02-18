@@ -25,7 +25,7 @@ private:
     sf::Sprite m_sprite {};
 
     // zoom
-    int scaleFactor {};
+    int m_scaleFactor {};
     long double m_zoomFactor {};
 
     // text
@@ -34,14 +34,13 @@ private:
 
     // private functions
     void init_variables();
-    void init_window(int width, int height);
+    void init_window();
     void init_image();
     void init_texture();
 
 public:
     // constructors
-    Window();
-    Window(int width, int height);
+    explicit Window(int width = 1920, int height = 1080);
 
     // destructor
     ~Window();
