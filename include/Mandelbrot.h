@@ -73,7 +73,7 @@ public:
     // interpolation functions
     static sf::Color linear_interp(const sf::Color& color1, const sf::Color& color2, double ratio);
 
-    sf::Color interpolate_color(double colorIndex, const std::vector<sf::Color> &colors);
+    static sf::Color interpolate_color(double colorIndex, const std::vector<sf::Color> &colors);
 };
 
 #endif //SFML_PROJECT_MADNELBROT_H

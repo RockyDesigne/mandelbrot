@@ -19,6 +19,12 @@ private:
     sf::Vector2i m_screen {};
     sf::Event m_event {};
 
+    // mandelbrot
+    sf::Image m_image {};
+    sf::Texture m_texture {};
+    sf::Sprite m_sprite {};
+
+    // zoom
     int scaleFactor {};
     long double m_zoomFactor {};
 
@@ -29,6 +35,8 @@ private:
     // private functions
     void init_variables();
     void init_window(int width, int height);
+    void init_image();
+    void init_texture();
 
 public:
     // constructors
@@ -46,6 +54,10 @@ public:
     void set_text();
 
     void update_text(Mandelbrot& mandelbrot);
+
+    void update_texture(Mandelbrot& mandelbrot);
+
+    void update_sprite();
 
     void poll_events(Mandelbrot& mandelbrot);
 

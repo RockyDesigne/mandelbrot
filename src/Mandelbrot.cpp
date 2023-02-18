@@ -90,7 +90,7 @@ void Mandelbrot::mandy(sf::Vector2i screen) {
 
             // Initialize the real and imaginary parts of the complex number to 0
             CoordType realComponent {0.0}, imagComponent {0.0};
-            int iters {0};
+            int iters {};
 
             // Perform the iterative calculation to determine whether the current point
             // is in the Mandelbrot set or not

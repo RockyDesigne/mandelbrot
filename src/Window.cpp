@@ -23,6 +23,8 @@ Window::Window(int width, int height) {
     this->load_font();
     this->set_text();
     this->init_window(width, height);
+    this->init_image();
+    this->init_texture();
 }
 
 // default constructor has default size of 1920 * 1080
@@ -31,6 +33,8 @@ Window::Window() {
     this->load_font();
     this->set_text();
     this->init_window(1920, 1080);
+    this->init_image();
+    this->init_texture();
 }
 
 // destructor
@@ -153,19 +157,13 @@ void Window::update(Mandelbrot& mandelbrot) {
 void Window::render(Mandelbrot &mandelbrot) {
     this->m_window->clear();
 
-    sf::Image image;
-    image.create(this->m_screen.x, this->m_screen.y);
-    sf::Texture mandelbrotTexture;
-    if (!mandelbrotTexture.create(this->m_screen.x, this->m_screen.y))
-        assert("Failed to create texture");
-
-    sf::Sprite mandelbrotSprite(mandelbrotTexture);
-
+    // calculate mandelbrot
     mandelbrot.mandy(this->m_screen);
 
-    mandelbrotTexture.loadFromImage(mandelbrot.get_image());
-    mandelbrotSprite.setTexture(mandelbrotTexture);
-    this->m_window->draw(mandelbrotSprite);
+    // update texture
+    this->update_texture(mandelbrot);
+    this->update_sprite();
+    this->m_window->draw(this->m_sprite);
 
     // update text
     this->update_text(mandelbrot);
@@ -185,7 +183,6 @@ void Window::set_text() {
     this->m_text.setCharacterSize(60);
     this->m_text.setFillColor(sf::Color::White);
     this->m_text.setPosition(10, 10);
-
 }
 
 void Window::update_text(Mandelbrot& mandelbrot) {
@@ -193,4 +190,21 @@ void Window::update_text(Mandelbrot& mandelbrot) {
     oss << "Iterations: " << mandelbrot.get_max_iterations() << "\n";
     oss << "Zoom Factor: " << mandelbrot.get_zoom() << "\n";
     this->m_text.setString(oss.str());
+}
+
+void Window::init_image() {
+    this->m_image.create(this->m_screen.x, this->m_screen.y);
+}
+
+void Window::init_texture() {
+    if (!this->m_texture.create(this->m_screen.x, this->m_screen.y))
+        assert("Failed to create texture");
+}
+
+void Window::update_sprite() {
+    this->m_sprite.setTexture(this->m_texture);
+}
+
+void Window::update_texture(Mandelbrot& mandelbrot) {
+    this->m_texture.loadFromImage(mandelbrot.get_image());
 }

@@ -1,4 +1,5 @@
 #include <filesystem>
+#include "Mandelbrot.h"
 #include "Window.h"
 
 static void modifyCurrentWorkingDirectory();
