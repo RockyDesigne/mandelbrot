@@ -12,7 +12,7 @@ void Mandelbrot::init_variables() {
 sf::Color Mandelbrot::interpolate_color(double colorIndex, const std::vector<sf::Color>& colors) {
 
     // Determine the maximum color index based on the number of colors in the provided vector
-    static const auto maxColor {colors.size() - 1};
+    const auto maxColor {colors.size() - 1};
 
     // Determine the maximum color index based on the number of colors in the provided vector
     colorIndex *= maxColor;
@@ -31,7 +31,7 @@ sf::Color Mandelbrot::interpolate_color(double colorIndex, const std::vector<sf:
 void Mandelbrot::set_color(int iters, int x, int y) {
 
     // Define a vector of colors to use for coloring the Mandelbrot set
-    static const std::vector<sf::Color> colors {
+    const std::vector<sf::Color> colors {
             {0,0,0},
             {255,0,0},
             {255,127,0},
